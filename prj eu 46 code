@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <math.h>
+
+int primes[100000];
+int idx = 0;
+int primecheck(int n);//Prototype
+int sqcheck(int n); //Prototype
+
+int main()
+{
+	int ans;
+	primes[idx++] = 3;
+	primes[idx++] = 5;
+	primes[idx++] = 7;
+	for (ans = 9; ans<=1000000; ans += 2)
+	{
+		printf("odd:%d\n", ans);
+		if (primecheck(ans)==1)
+		{ 
+			primes[idx++] = ans;
+      printf("prime number checked\n\n");
+			continue;
+		}
+		if (sqcheck(ans)==0)
+		{
+			printf("===square not right.===\n\n");
+			break;
+		}
+		else 
+		{
+			printf("square right.\n\n");
+			continue;
+		}
+	}
+}
+
+int primecheck(int n)
+{
+	for (int i = 0; i < idx; i++)
+	{
+		if (n % primes[i] == 0)
+    {
+			return 0;
+		}
+	}
+	return 1;
+}
+int sqcheck(int n)
+{
+	for (int i = 0; i < idx; i++)
+	{
+		int s = (n - primes[i]) / 2;  
+		int t = sqrt(s);
+		if (t * t == s)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
